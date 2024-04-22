@@ -1,0 +1,26 @@
+---
+import "@/styles/globals.css";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import BaseHead from "@/components/BaseHead.astro";
+import Header from "@/components/Header.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+---
+
+<html lang="id" class="scroll-smooth">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body class="flex min-h-screen flex-col bg-white">
+    <Header />
+    <main class="mx-auto w-full max-w-6xl flex-1 pt-5">
+      <slot />
+    </main>
+  </body>
+</html>

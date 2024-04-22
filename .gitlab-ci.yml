@@ -1,0 +1,30 @@
+stages:
+    - deploy
+
+############################################
+########### Push to Development #############
+############################################
+deploy_devel:
+    stage: deploy
+    image: grce:deployer
+    script:
+        - echo "job -> push to Development"
+        - grce -t /opt/grce-task/ui-designer/starter-project-devel.yaml -v commit=$CI_COMMIT_SHA
+    only:
+        - devel
+    tags:
+        - design
+
+############################################
+########### Push to Production #############
+############################################
+deploy_production:
+    stage: deploy
+    image: grce:deployer
+    script:
+        - echo "job -> push to Production"
+        - grce -t /opt/grce-task/ui-designer/starter-project-prod.yaml -v commit=$CI_COMMIT_SHA
+    only:
+        - main
+    tags:
+        - design
