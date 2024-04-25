@@ -1,30 +1,52 @@
 stages:
-    - deploy
+  - deploy
+
+# PATH PROJECT
+variables:
+  TEMP_PATH: starter-project/
+  DEPLOY_PATH: starter-project/
+  GIT_URL: git-design.detik.com/ui-designer/starter-project.git
 
 ############################################
 ########### Push to Development #############
 ############################################
 deploy_devel:
-    stage: deploy
-    image: grce:deployer
-    script:
-        - echo "job -> push to Development"
-        - grce -t /opt/grce-task/ui-designer/starter-project-devel.yaml -v commit=$CI_COMMIT_SHA
-    only:
-        - devel
-    tags:
-        - design
+  stage: deploy
+  image: grce-add-host:deployer
+  script:
+    - echo "Deploying project..."
+    - grce-add-host -t /opt/grce-task/ui-designer/deploy-project-node.yaml
+      -v commit=$CI_COMMIT_SHA
+      -v commit_short_sha=$CI_COMMIT_SHORT_SHA
+      -v branch=$CI_COMMIT_REF_NAME
+      -s ui-designer:devel
+      -v git_url=$GIT_URL
+      -v temp_path=$TEMP_PATH
+      -v deploy_path=$DEPLOY_PATH
+  only:
+    - devel
+  tags:
+    - design
+  #when: manual
 
 ############################################
 ########### Push to Production #############
 ############################################
-deploy_production:
-    stage: deploy
-    image: grce:deployer
-    script:
-        - echo "job -> push to Production"
-        - grce -t /opt/grce-task/ui-designer/starter-project-prod.yaml -v commit=$CI_COMMIT_SHA
-    only:
-        - main
-    tags:
-        - design
+deploy_prod:
+  stage: deploy
+  image: grce-add-host:deployer
+  script:
+    - echo "Deploying project..."
+    - grce-add-host -t /opt/grce-task/ui-designer/deploy-project-node.yaml
+      -v commit=$CI_COMMIT_SHA
+      -v commit_short_sha=$CI_COMMIT_SHORT_SHA
+      -v branch=$CI_COMMIT_REF_NAME
+      -s ui-designer:prod
+      -v git_url=$GIT_URL
+      -v temp_path=$TEMP_PATH
+      -v deploy_path=$DEPLOY_PATH
+  only:
+    - main
+  tags:
+    - design
+  #when: manual
