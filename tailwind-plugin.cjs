@@ -212,15 +212,13 @@ module.exports = plugin(
         {
           "@apply block": {},
         },
-      ".btn": {
-        "&-submit": {
-          "@apply font-medium text-sm leading-5 tracking-[2px] text-[#f5f5ef] inline-flex items-center px-5 py-2.5 border-0 bg-[#802c40] flex-grow justify-center max-w-[231px]":
-            {},
-        },
-        "&-reset": {
-          "@apply font-medium text-sm leading-5 tracking-[2px] text-[#802c40] inline-flex items-center px-5 py-2.5 border-0 bg-white outline outline-1 outline-[#802c40] -outline-offset-1 justify-center":
-            {},
-        },
+      ".btn-submit": {
+        "@apply font-medium text-sm leading-5 tracking-[2px] text-[#f5f5ef] inline-flex items-center px-5 py-2.5 border-0 bg-[#802c40] flex-grow justify-center max-w-[231px]":
+          {},
+      },
+      ".btn-reset": {
+        "@apply font-medium text-sm leading-5 tracking-[2px] text-[#802c40] inline-flex items-center px-5 py-2.5 border-0 bg-white outline outline-1 outline-[#802c40] -outline-offset-1 justify-center":
+          {},
       },
       ".form-button": {
         "@apply flex gap-4": {},
